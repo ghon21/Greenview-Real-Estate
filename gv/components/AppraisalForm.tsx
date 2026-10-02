@@ -6,7 +6,7 @@ export default function AppraisalForm() {
   const [error, setError] = useState("");
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault(); setError(""); setState("sending");
-    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const data = Object.fromEntries(new URLSearchParams(new FormData(e.currentTarget) as any));
     try {
       const res = await fetch("/api/leads", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(data) });
       const j = await res.json();
